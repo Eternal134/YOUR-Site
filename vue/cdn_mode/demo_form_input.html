@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单输入</title>
+
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <style>
+        .task_complete {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app1">
+        <template v-for="n in 1">
+            <p>这个p标签在模板里</p>
+        </template>
+        <p>标题：</p>
+        <input v-model="title" placeholder="请输入标题..." ref="input">
+        <p>内容</p>
+        <input v-model='text' placeholder="请编辑内容...">
+        <br><br><br>
+        <p>预览：</p>
+        <h2>{{ title }} </h2>
+        <p>{{ text }} </p>
+    </div>
+
+    <br><br><br><br><br>
+
+    <div id="toDoList">
+        <div v-for="task in tasks">
+            <input type="checkbox" v-model="task.checked"> 
+            <span :class="genTaskClass(task)"> {{ task.task_des }} </span>
+        </div>
+    </div>
+
+    <br><br><br><br><br>
+
+    <div id="userSex">
+        <p>用户信息输入</p>
+        <input type="text" v-model="name" placeholder="请输入姓名">
+        <!-- 性别选择单选框 -->
+        <div>
+            <input type="radio" id="man" v-model="sex" value="man">
+            <label for="man">男</label>
+            <input type="radio" value="woman" id="woman" v-model="sex">
+            <label for="woman">女</label>
+        </div>
+
+        <div>
+            <p>信息核对</p>
+            <p>{{ name }}{{ sexChineseCall }} 你好！ </p>
+        </div>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    title: '',
+                    text: ''
+                }
+            },
+
+            mounted() {
+                this.$refs.input.focus()
+            }
+        }).mount('#app1')
+
+        Vue.createApp({
+            data() {
+                return {
+                    tasks: [
+                        {
+                            task_des: '学习vue',
+                            checked: false
+                        },
+                        {
+                            task_des: '毕设',
+                            checked: false
+                        }
+                    ]
+                }
+            },
+
+            methods: {
+                genTaskClass(task) {
+                    return task.checked ? "task_complete" : "task_uncomplete";
+                }
+            }
+        }).mount('#toDoList')
+
+        Vue.createApp({
+            data() {
+                return {
+                    name: '',
+                    sex: ''
+                }
+            },
+
+            computed: {
+                sexChineseCall() {
+                    switch (this.sex) {
+                        case 'man':
+                            return '先生';
+                        case 'woman':
+                            return '女士';
+                        default:
+                            return '';
+                    }
+                }
+            }
+        }).mount('#userSex')
+    </script>
+</body>
+
+</html>

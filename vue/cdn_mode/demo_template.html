@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>v-for</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+    <div id="app">
+        <template v-for="(item, index) in list" :key="item.id">
+            <div>{{item.text}}--{{index}}</div>
+            <span>{{item.text}}</span>
+        </template>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    list: [{
+                            id: "010120",
+                            text: "How"
+                        },
+                        {
+                            id: "010121",
+                            text: "are"
+                        },
+                        {
+                            id: "010122",
+                            text: "you"
+                        }
+                    ]
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

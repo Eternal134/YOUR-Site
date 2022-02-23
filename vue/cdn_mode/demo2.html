@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计数器</title>
+
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+    <div id="app1">
+        <button @click="increment" :disabled="my_disabled">
+            {{ count }}
+        </button>
+        + 1 = {{ count + 1}}
+    </div>
+
+    <div id="app2">
+        <p>使用文本插值：{{ msg }}</p>
+        <p>使用v-html插值：<span v-html="msg"></span></p>
+
+        <!-- <p v-if="">Now you see me</p> -->
+
+        <a :[attribute_name]="url">百度链接</a>
+    </div>
+
+    <script>
+
+        Vue.createApp({
+            data() {
+                return {
+                    count: 10,
+                    my_disabled: false
+                }
+            },
+
+            methods: {
+                increment() {
+                    this.count ++
+                }
+            },
+
+            mounted() {
+                console.log("组件app1被挂载");
+                this.increment();
+            }
+        }).mount("#app1")
+
+        Vue.createApp({
+            data() {
+                return {
+                    msg: '<span style="color: red">This should be red.</span>',
+                    url: 'https://baidu.com',
+                    attribute_name : 'href'
+                }
+            }
+        }).mount("#app2")
+    </script>
+</body>
+
+</html>

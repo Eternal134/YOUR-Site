@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客组件</title>
+
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+
+    <template>
+        <BlogPost v-for="post in posts" :key="post.id" :title="post.title"></BlogPost>
+    </template>
+
+    <script type="module">
+        import BlogPost from './BlogPost.vue'
+
+        Vue.createApp({
+            components: {
+                BlogPost
+            },
+            data() {
+                return {
+                    posts: [{
+                            id: 1,
+                            title: 'My journey with Vue'
+                        },
+                        {
+                            id: 2,
+                            title: 'Blogging with Vue'
+                        },
+                        {
+                            id: 3,
+                            title: 'Why Vue is so fun'
+                        }
+                    ]
+                }
+            }
+        }).mount('app')
+    </script>
+</body>
+
+</html>

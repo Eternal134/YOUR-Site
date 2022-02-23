@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件处理</title>
+
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+
+    <div id="app1">
+        <button @click="greet('vue')">Greet to vue!</button>
+        <br>
+        <button @keyup.enter="greet('world')">Greet to world!(聚焦后enter)</button>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    name: "vue.js"
+                }
+            },
+
+            methods: {
+                // greet(event) {
+                //     // 方法中的 `this` 指向的是当前活跃的组件实例
+                //     alert(`Hello ${this.name}!`)
+                //     // `event` 是 DOM 原生事件
+                //     if (event) {
+                //         alert(event.target.tagName)
+                //     }
+                // },
+
+                greet(msg) {
+                    alert(`Hello ${msg}!`)
+                }
+            }
+        }).mount("#app1")
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性demo</title>
+
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>Has published books:</p>
+        <span>{{ isPublishedBooks ? "yes" : "no" }}</span>
+
+        <div v-if=isPublishedBooks>
+            <p>Published books number:</p>
+            <span>{{ publishedBooksNumber }}</span>
+        </div>
+
+        <p>pubilshed books list:</p>
+        <ol>
+            <li v-for="book in author.books">
+                {{ book }}
+            </li>
+        </ol>
+
+        <br>
+        <p>在响应式属性中，日期不会自动更新：{{ nowTime }}</p>
+    </div>
+    <br><br><br>
+    <div id="app2">
+        <p>可写计算属性：</p>
+        <p>修改fullName前为 John Doe</p>
+        <p>使用fullName的set方法修改fulleName: {{ fullName = "Bob Alan" }} </p>
+        <p :style="styleObj"><b>不应该利用可计算属性修改原值！</b></p>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    author: {
+                        name: 'John Doe',
+                        books: [
+                            'Vue 2 - Advanced Guide',
+                            'Vue 3 - Basic Guide',
+                            'Vue 4 - The Mystery'
+                        ]
+                    }
+                }
+            },
+
+            // 计算属性
+            computed: {
+                isPublishedBooks() {
+                    return this.author.books.length > 0 ? true : false
+                },
+
+                publishedBooksNumber() {
+                    return this.author.books.length
+                },
+
+                nowTime() {
+                    return Date.now()
+                }
+            }
+        }).mount("#app")
+    </script>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    firstName: 'John',
+                    lastName: 'Doe',
+
+                    styleObj: {
+                        'color': 'red',
+                        'fontsize': '13px'
+                    }
+                }
+            },
+
+            computed: {
+                fullName: {
+
+                    get() {
+                        return this.firstName + ' ' + this.lastName
+                    },
+
+                    set(value) {
+                        [this.firstName, this.lastName] = value.split(" ")
+                    }
+                }
+            }
+        }).mount('#app2')
+    </script>
+</body>
+
+</html>

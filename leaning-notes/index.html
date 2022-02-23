@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,8 +9,24 @@
     <title>学习笔记</title>
     <script type="text/javascript" src="patch.js" defer></script>
 </head>
+
 <body>
+    <p>我的学习笔记</p>
+    <select name="select" οnchange="self.location.href=options[selectedIndex].value">
+        <option selected>友情链接</option>
+        <option value="https://man.ilovefishc.com/html5/">可乐鸡翅</option>
+    </select>
     <h2><a href="html/html_notes_index.html">HTML</a></h2>
     <h2><a href="cooking/index.html">烹饪</a></h2>
+
+    <br><br><br><br><br><br>
+    <p>留下你的联系方式</p>
+    <form action="" method="post">
+        <label>邮箱：<input type="email" name="email" placeholder="请输入邮箱"></label><br>
+        <label>电话：<input type="tel" name="tel" maxlength="11"></label><br>
+        <label>网址：<input type="url" name="url"></label><br>
+        <button type="submit">提交</button>
+    </form>
 </body>
+
 </html>
